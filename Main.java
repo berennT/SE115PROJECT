@@ -285,7 +285,72 @@ public class Main {
     }
 
 public static String compareTwoCommodities(String c1, String c2) {
-    return "DUMMY is better by 1234";
+    int commindex1 = 0;
+    switch (c1) {
+        case "Gold":
+            commindex1 = 0;
+            break;
+        case "Oil":
+            commindex1 = 1;
+            break;
+        case "Silver":
+            commindex1 = 2;
+            break;
+        case "Wheat":
+            commindex1 = 3;
+            break;
+        case "Copper":
+            commindex1 = 4;
+            break;
+        default:
+            return "INVALID_COMMODITY";
+
+    }
+    int commindex2 = 0;
+    switch (c2) {
+        case "Gold":
+            commindex2 = 0;
+            break;
+        case "Oil":
+            commindex2 = 1;
+            break;
+        case "Silver":
+            commindex2 = 2;
+            break;
+        case "Wheat":
+            commindex2 = 3;
+            break;
+        case "Copper":
+            commindex2 = 4;
+            break;
+        default:
+            return "INVALID_COMMODITY";
+
+    }
+
+    int total1 = 0;
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 28; j++) {
+            total1+=data[i][j][commindex1];
+
+        }
+    }
+    int total2 = 0;
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 28; j++) {
+            total2+=data[i][j][commindex2];
+
+        }
+    }
+    if(total1>total2){
+        return ("C1 is better by " + (total1-total2));
+    }
+    else if(total2>total1){
+        return ("C2 is better by " + (total2-total1));
+    }
+    else {
+        return "Equal" ;
+    }
 }
 
 public static String bestWeekOfMonth(int month) {
