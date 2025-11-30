@@ -18,6 +18,7 @@ public class Main {
         int commindex = 0;
         for (int m = 0; m < 12; m++) {
             String fileName = "Data_Files/" + months[m] + ".txt";
+
             try {
                 BufferedReader br = new BufferedReader(new FileReader(fileName));
                 String line;
@@ -263,29 +264,28 @@ public class Main {
         if (month < 0 || month > 11) {
             return -99999;
         }
-        int a = 0;
-        int b = 0;
-        int diff = 0;
-        int c = 0;
+        int a=0;
+        int[] dailyTotal = new int[28];
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 5; j++) {
-                a = data[month][i][j];
-                if (j < 4) {
-                    b = data[month][i][j + 1];
-                } else if (i < 27) {
-                    b = data[month][i + 1][j];
-                }
-                diff = a - b;
-                if (diff < 0) {
-                    diff *= -1;
-                }
-                if (diff > c) {
-                    c = diff;
-                }
-
+                a += data[month][i][j];
+            }
+            dailyTotal[i]=a;
+            a=0;
+        }
+        int diff=0;
+        int b=0;
+        for (int i = 0; i < 27; i++) {
+            diff=dailyTotal[i]-dailyTotal[i+1];
+            if(diff<0){
+                diff*=-1;
+            }
+            if(diff>b){
+                b=diff;
             }
         }
-        return c;
+
+        return b;
     }
 
     public static String compareTwoCommodities(String c1, String c2) {
@@ -347,9 +347,9 @@ public class Main {
             }
         }
         if (total1 > total2) {
-            return ("C1 is better by " + (total1 - total2));
+            return (c1 + " is better by " + (total1 - total2));
         } else if (total2 > total1) {
-            return ("C2 is better by " + (total2 - total1));
+            return (c2 + " is better by " + (total2 - total1));
         } else {
             return "Equal";
         }
