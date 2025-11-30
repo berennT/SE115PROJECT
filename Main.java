@@ -284,81 +284,117 @@ public class Main {
         return c;
     }
 
-public static String compareTwoCommodities(String c1, String c2) {
-    int commindex1 = 0;
-    switch (c1) {
-        case "Gold":
-            commindex1 = 0;
-            break;
-        case "Oil":
-            commindex1 = 1;
-            break;
-        case "Silver":
-            commindex1 = 2;
-            break;
-        case "Wheat":
-            commindex1 = 3;
-            break;
-        case "Copper":
-            commindex1 = 4;
-            break;
-        default:
-            return "INVALID_COMMODITY";
-
-    }
-    int commindex2 = 0;
-    switch (c2) {
-        case "Gold":
-            commindex2 = 0;
-            break;
-        case "Oil":
-            commindex2 = 1;
-            break;
-        case "Silver":
-            commindex2 = 2;
-            break;
-        case "Wheat":
-            commindex2 = 3;
-            break;
-        case "Copper":
-            commindex2 = 4;
-            break;
-        default:
-            return "INVALID_COMMODITY";
-
-    }
-
-    int total1 = 0;
-    for (int i = 0; i < 12; i++) {
-        for (int j = 0; j < 28; j++) {
-            total1+=data[i][j][commindex1];
+    public static String compareTwoCommodities(String c1, String c2) {
+        int commindex1 = 0;
+        switch (c1) {
+            case "Gold":
+                commindex1 = 0;
+                break;
+            case "Oil":
+                commindex1 = 1;
+                break;
+            case "Silver":
+                commindex1 = 2;
+                break;
+            case "Wheat":
+                commindex1 = 3;
+                break;
+            case "Copper":
+                commindex1 = 4;
+                break;
+            default:
+                return "INVALID_COMMODITY";
 
         }
-    }
-    int total2 = 0;
-    for (int i = 0; i < 12; i++) {
-        for (int j = 0; j < 28; j++) {
-            total2+=data[i][j][commindex2];
+        int commindex2 = 0;
+        switch (c2) {
+            case "Gold":
+                commindex2 = 0;
+                break;
+            case "Oil":
+                commindex2 = 1;
+                break;
+            case "Silver":
+                commindex2 = 2;
+                break;
+            case "Wheat":
+                commindex2 = 3;
+                break;
+            case "Copper":
+                commindex2 = 4;
+                break;
+            default:
+                return "INVALID_COMMODITY";
 
         }
-    }
-    if(total1>total2){
-        return ("C1 is better by " + (total1-total2));
-    }
-    else if(total2>total1){
-        return ("C2 is better by " + (total2-total1));
-    }
-    else {
-        return "Equal" ;
-    }
-}
 
-public static String bestWeekOfMonth(int month) {
-    return "DUMMY";
-}
+        int total1 = 0;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 28; j++) {
+                total1 += data[i][j][commindex1];
 
-public static void main(String[] args) {
-    loadData();
-    System.out.println("Data loaded – ready for queries");
-}
+            }
+        }
+        int total2 = 0;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 28; j++) {
+                total2 += data[i][j][commindex2];
+
+            }
+        }
+        if (total1 > total2) {
+            return ("C1 is better by " + (total1 - total2));
+        } else if (total2 > total1) {
+            return ("C2 is better by " + (total2 - total1));
+        } else {
+            return "Equal";
+        }
+    }
+
+    public static String bestWeekOfMonth(int month) {
+        if (month < 0 || month > 11) {
+            return "INVALID_MONTH";
+        }
+        int total1 = 0;
+        int total2 = 0;
+        int total3 = 0;
+        int total4 = 0;
+
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 5; j++) {
+                total1 += data[month][i][j];
+            }
+        }
+
+        for (int i = 7; i < 14; i++) {
+            for (int j = 0; j < 5; j++) {
+                total2 += data[month][i][j];
+            }
+        }
+        for (int i = 14; i < 21; i++) {
+            for (int j = 0; j < 5; j++) {
+                total3 += data[month][i][j];
+            }
+        }
+        for (int i = 21; i < 28; i++) {
+            for (int j = 0; j < 5; j++) {
+                total4 += data[month][i][j];
+            }
+        }
+        int max = total1;
+        int k=0;
+        int arr[] = {total1, total2, total3, total4};
+        for (int i = 0; i < 4; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+                k=i;
+            }
+        }
+        return "Week " + (k + 1);
+    }
+
+    public static void main(String[] args) {
+        loadData();
+        System.out.println("Data loaded – ready for queries");
+    }
 }
