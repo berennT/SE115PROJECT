@@ -26,6 +26,10 @@ public class Main {
                     if (parts.length != 3) {
                         continue;
                     }
+                    if (parts[0].equals("Day")) {
+                        continue;
+                    }
+
                     switch (parts[1]) {
                         case "Gold":
                             commindex = 0;
@@ -382,12 +386,12 @@ public class Main {
             }
         }
         int max = total1;
-        int k=0;
+        int k = 0;
         int arr[] = {total1, total2, total3, total4};
         for (int i = 0; i < 4; i++) {
             if (arr[i] > max) {
                 max = arr[i];
-                k=i;
+                k = i;
             }
         }
         return "Week " + (k + 1);
