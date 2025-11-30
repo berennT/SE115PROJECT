@@ -89,15 +89,96 @@ public class Main {
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        return 1234;
+        if(!commodity.equals("Gold") && !commodity.equals("Oil") && !commodity.equals("Silver") && !commodity.equals("Wheat")&& !commodity.equals("Copper")) {
+            return -99999;
+        }
+        if(from<1||to>28||to<from){
+            return -99999;
+        }
+        int commindex=0;
+        switch (commodity) {
+            case "Gold":
+                commindex = 0;
+                break;
+            case "Oil":
+                commindex = 1;
+                break;
+            case "Silver":
+                commindex = 2;
+                break;
+            case "Wheat":
+                commindex = 3;
+                break;
+            case "Copper":
+                commindex = 4;
+                break;
+        }
+        int profit=0;
+        for(int i=0;i<12;i++){
+            for(int j= from-1 ; j <= to-1 ; j++) {
+                profit += data[i][j][commindex];
+            }
+        }
+        return profit;
     }
 
     public static int bestDayOfMonth(int month) {
-        return 1234;
+        if(month < 0 || month > 11) {
+            return -1;
+        }
+        int k=0;
+        int m=0;
+        int max=data[month][0][0];
+        for(int i=0;i<28;i++){
+            for(int j=0;j<5;j++){
+                k+=data[month][i][j];
+
+            }
+            if(k>max){
+                max=k;
+                m=i;
+            }
+            k=0;
+        }
+        return m+1;
     }
 
     public static String bestMonthForCommodity(String comm) {
-        return "DUMMY";
+        int k=0;
+        int m=0;
+        int commindex=0;
+        switch (comm) {
+            case "Gold":
+                commindex = 0;
+                break;
+            case "Oil":
+                commindex = 1;
+                break;
+            case "Silver":
+                commindex = 2;
+                break;
+            case "Wheat":
+                commindex = 3;
+                break;
+            case "Copper":
+                commindex = 4;
+                break;
+            default:
+                return "INVALID_COMMODITY";
+        }
+
+        int max=0;
+        for(int i=0;i<12;i++){
+            for(int j=0;j<28;j++){
+                k+=data[i][j][commindex];
+            }
+            if(k>max){
+                max=k;
+                m=i;
+            }
+            k=0;
+        }
+    return months[m];
     }
 
     public static int consecutiveLossDays(String comm) {
