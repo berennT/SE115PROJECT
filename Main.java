@@ -54,7 +54,7 @@ public class Main {
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
-        if(month < 0 || month > 11) {
+        if (month < 0 || month > 11) {
             return "INVALID_MONTH";
         }
         int[] profit = new int[COMMS];
@@ -71,31 +71,32 @@ public class Main {
                 b = i;
             }
         }
-        return commodities[b]+ " " + max;
+        return commodities[b] + " " + max;
     }
+
     public static int totalProfitOnDay(int month, int day) {
-        int a=0;
-        if(month < 0 || month > 11) {
+        int a = 0;
+        if (month < 0 || month > 11) {
             return -99999;
         }
-        if(day < 1 || day > DAYS) {
+        if (day < 1 || day > DAYS) {
             return -99999;
         }
 
-        for(int i=0;i<COMMS;i++){
-            a+=data[month][day-1][i];
+        for (int i = 0; i < COMMS; i++) {
+            a += data[month][day - 1][i];
         }
         return a;
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        if(!commodity.equals("Gold") && !commodity.equals("Oil") && !commodity.equals("Silver") && !commodity.equals("Wheat")&& !commodity.equals("Copper")) {
+        if (!commodity.equals("Gold") && !commodity.equals("Oil") && !commodity.equals("Silver") && !commodity.equals("Wheat") && !commodity.equals("Copper")) {
             return -99999;
         }
-        if(from<1||to>28||to<from){
+        if (from < 1 || to > 28 || to < from) {
             return -99999;
         }
-        int commindex=0;
+        int commindex = 0;
         switch (commodity) {
             case "Gold":
                 commindex = 0;
@@ -113,9 +114,9 @@ public class Main {
                 commindex = 4;
                 break;
         }
-        int profit=0;
-        for(int i=0;i<12;i++){
-            for(int j= from-1 ; j <= to-1 ; j++) {
+        int profit = 0;
+        for (int i = 0; i < 12; i++) {
+            for (int j = from - 1; j <= to - 1; j++) {
                 profit += data[i][j][commindex];
             }
         }
@@ -123,30 +124,30 @@ public class Main {
     }
 
     public static int bestDayOfMonth(int month) {
-        if(month < 0 || month > 11) {
+        if (month < 0 || month > 11) {
             return -1;
         }
-        int k=0;
-        int m=0;
-        int max=data[month][0][0];
-        for(int i=0;i<28;i++){
-            for(int j=0;j<5;j++){
-                k+=data[month][i][j];
+        int k = 0;
+        int m = 0;
+        int max = data[month][0][0];
+        for (int i = 0; i < 28; i++) {
+            for (int j = 0; j < 5; j++) {
+                k += data[month][i][j];
 
             }
-            if(k>max){
-                max=k;
-                m=i;
+            if (k > max) {
+                max = k;
+                m = i;
             }
-            k=0;
+            k = 0;
         }
-        return m+1;
+        return m + 1;
     }
 
     public static String bestMonthForCommodity(String comm) {
-        int k=0;
-        int m=0;
-        int commindex=0;
+        int k = 0;
+        int m = 0;
+        int commindex = 0;
         switch (comm) {
             case "Gold":
                 commindex = 0;
@@ -167,22 +168,22 @@ public class Main {
                 return "INVALID_COMMODITY";
         }
 
-        int max=0;
-        for(int i=0;i<12;i++){
-            for(int j=0;j<28;j++){
-                k+=data[i][j][commindex];
+        int max = 0;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 28; j++) {
+                k += data[i][j][commindex];
             }
-            if(k>max){
-                max=k;
-                m=i;
+            if (k > max) {
+                max = k;
+                m = i;
             }
-            k=0;
+            k = 0;
         }
-    return months[m];
+        return months[m];
     }
 
     public static int consecutiveLossDays(String comm) {
-        int commindex=0;
+        int commindex = 0;
         switch (comm) {
             case "Gold":
                 commindex = 0;
@@ -203,19 +204,18 @@ public class Main {
                 return -1;
 
         }
-        int a=0;
-        int sayac=0;
-        for(int i=0;i<12;i++) {
+        int a = 0;
+        int sayac = 0;
+        for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 28; j++) {
-                    if(data[i][j][commindex]<0) {
-                        sayac++;
-                    }
-                        else{
-                            sayac=0;
-                        }
-                    if (sayac>a) {
-                        a=sayac;
-                    }
+                if (data[i][j][commindex] < 0) {
+                    sayac++;
+                } else {
+                    sayac = 0;
+                }
+                if (sayac > a) {
+                    a = sayac;
+                }
 
             }
         }
@@ -223,7 +223,7 @@ public class Main {
     }
 
     public static int daysAboveThreshold(String comm, int threshold) {
-        int commindex=0;
+        int commindex = 0;
         switch (comm) {
             case "Gold":
                 commindex = 0;
@@ -243,31 +243,57 @@ public class Main {
             default:
                 return -1;
         }
-        int sayac=0;
-        for(int i=0;i<12;i++){
-            for(int j=0;j<28;j++){
-                if(data[i][j][commindex]>threshold){
-                   sayac++;
+        int sayac = 0;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 28; j++) {
+                if (data[i][j][commindex] > threshold) {
+                    sayac++;
                 }
             }
         }
         return sayac;
     }
 
+
     public static int biggestDailySwing(int month) {
-        return 1234;
+        if (month < 0 || month > 11) {
+            return -99999;
+        }
+        int a = 0;
+        int b = 0;
+        int diff = 0;
+        int c = 0;
+        for (int i = 0; i < 28; i++) {
+            for (int j = 0; j < 5; j++) {
+                a = data[month][i][j];
+                if (j < 4) {
+                    b = data[month][i][j + 1];
+                } else if (i < 27) {
+                    b = data[month][i + 1][j];
+                }
+                diff = a - b;
+                if (diff < 0) {
+                    diff *= -1;
+                }
+                if (diff > c) {
+                    c = diff;
+                }
+
+            }
+        }
+        return c;
     }
 
-    public static String compareTwoCommodities(String c1, String c2) {
-        return "DUMMY is better by 1234";
-    }
+public static String compareTwoCommodities(String c1, String c2) {
+    return "DUMMY is better by 1234";
+}
 
-    public static String bestWeekOfMonth(int month) {
-        return "DUMMY";
-    }
+public static String bestWeekOfMonth(int month) {
+    return "DUMMY";
+}
 
-    public static void main(String[] args) {
-        loadData();
-        System.out.println("Data loaded – ready for queries");
-    }
+public static void main(String[] args) {
+    loadData();
+    System.out.println("Data loaded – ready for queries");
+}
 }
