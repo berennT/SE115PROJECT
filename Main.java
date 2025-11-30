@@ -134,9 +134,12 @@ public class Main {
         }
         int k = 0;
         int m = 0;
-        int max = data[month][0][0];
-        for (int i = 0; i < 28; i++) {
-            for (int j = 0; j < 5; j++) {
+        int max = 0;
+        for (int j = 0; j < COMMS; j++) {
+            max += data[month][0][j];
+        }
+        for (int i = 1; i < DAYS ; i++) {
+            for (int j = 0; j < COMMS ; j++) {
                 k += data[month][i][j];
 
             }
@@ -172,10 +175,13 @@ public class Main {
             default:
                 return "INVALID_COMMODITY";
         }
-
         int max = 0;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 28; j++) {
+        for (int j = 0; j < DAYS; j++) {
+            max += data[0][j][commindex];
+        }
+
+        for (int i = 1; i < MONTHS; i++) {
+            for (int j = 0; j < DAYS; j++) {
                 k += data[i][j][commindex];
             }
             if (k > max) {
@@ -249,8 +255,8 @@ public class Main {
                 return -1;
         }
         int sayac = 0;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 28; j++) {
+        for (int i = 0; i < MONTHS ; i++) {
+            for (int j = 0; j < DAYS ; j++) {
                 if (data[i][j][commindex] > threshold) {
                     sayac++;
                 }
@@ -266,8 +272,8 @@ public class Main {
         }
         int a=0;
         int[] dailyTotal = new int[28];
-        for (int i = 0; i < 28; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < DAYS; i++) {
+            for (int j = 0; j < COMMS; j++) {
                 a += data[month][i][j];
             }
             dailyTotal[i]=a;
@@ -333,15 +339,15 @@ public class Main {
         }
 
         int total1 = 0;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 28; j++) {
+        for (int i = 0; i < MONTHS; i++) {
+            for (int j = 0; j < DAYS; j++) {
                 total1 += data[i][j][commindex1];
 
             }
         }
         int total2 = 0;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 28; j++) {
+        for (int i = 0; i < MONTHS; i++) {
+            for (int j = 0; j < DAYS; j++) {
                 total2 += data[i][j][commindex2];
 
             }
@@ -365,23 +371,23 @@ public class Main {
         int total4 = 0;
 
         for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < COMMS; j++) {
                 total1 += data[month][i][j];
             }
         }
 
         for (int i = 7; i < 14; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < COMMS; j++) {
                 total2 += data[month][i][j];
             }
         }
         for (int i = 14; i < 21; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < COMMS; j++) {
                 total3 += data[month][i][j];
             }
         }
         for (int i = 21; i < 28; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < COMMS; j++) {
                 total4 += data[month][i][j];
             }
         }
