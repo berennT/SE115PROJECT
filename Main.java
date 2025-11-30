@@ -182,11 +182,76 @@ public class Main {
     }
 
     public static int consecutiveLossDays(String comm) {
-        return 1234;
+        int commindex=0;
+        switch (comm) {
+            case "Gold":
+                commindex = 0;
+                break;
+            case "Oil":
+                commindex = 1;
+                break;
+            case "Silver":
+                commindex = 2;
+                break;
+            case "Wheat":
+                commindex = 3;
+                break;
+            case "Copper":
+                commindex = 4;
+                break;
+            default:
+                return -1;
+
+        }
+        int a=0;
+        int sayac=0;
+        for(int i=0;i<12;i++) {
+            for (int j = 0; j < 28; j++) {
+                    if(data[i][j][commindex]<0) {
+                        sayac++;
+                    }
+                        else{
+                            sayac=0;
+                        }
+                    if (sayac>a) {
+                        a=sayac;
+                    }
+
+            }
+        }
+        return a;
     }
 
     public static int daysAboveThreshold(String comm, int threshold) {
-        return 1234;
+        int commindex=0;
+        switch (comm) {
+            case "Gold":
+                commindex = 0;
+                break;
+            case "Oil":
+                commindex = 1;
+                break;
+            case "Silver":
+                commindex = 2;
+                break;
+            case "Wheat":
+                commindex = 3;
+                break;
+            case "Copper":
+                commindex = 4;
+                break;
+            default:
+                return -1;
+        }
+        int sayac=0;
+        for(int i=0;i<12;i++){
+            for(int j=0;j<28;j++){
+                if(data[i][j][commindex]>threshold){
+                   sayac++;
+                }
+            }
+        }
+        return sayac;
     }
 
     public static int biggestDailySwing(int month) {
