@@ -1,7 +1,9 @@
+
 // Main.java — Students version
 
-import java.io.*;
+import java.io.File;
 import java.util.*;
+import java.nio.file.Paths;
 
 public class Main {
     static final int MONTHS = 12;
@@ -12,26 +14,28 @@ public class Main {
             "July", "August", "September", "October", "November", "December"};
     static int[][][] data = new int[MONTHS][DAYS][COMMS];
 
+
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
+        data = new int[MONTHS][DAYS][COMMS];
         String[] parts;
-        int commindex = 0;
+        int commindex = -1;
         for (int m = 0; m < 12; m++) {
-            String fileName = "Data_Files/" + months[m] + ".txt";
-
+            Scanner reader= null;
             try {
-                BufferedReader br = new BufferedReader(new FileReader(fileName));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    parts = line.split(",");
+                reader = new Scanner(Paths.get("Data_Files/" + months[m] + ".txt"));
+                while (reader.hasNextLine()) {
+                    parts = reader.nextLine().split(",");
                     if (parts.length != 3) {
                         continue;
                     }
-                    if (parts[0].equals("Day")) {
+                    if(parts[0].trim().equals("Day")){
                         continue;
                     }
-
-                    switch (parts[1]) {
+                    if (parts[0].trim().isEmpty()) {
+                        continue;
+                    }
+                    switch (parts[1].trim()) {
                         case "Gold":
                             commindex = 0;
                             break;
@@ -48,14 +52,20 @@ public class Main {
                             commindex = 4;
                             break;
                     }
-                    data[m][Integer.parseInt(parts[0]) - 1][commindex] = Integer.parseInt(parts[2]);
-
+                    data[m][Integer.parseInt(parts[0]) - 1][commindex] = Integer.parseInt(parts[2].trim());
                 }
-                br.close();
             } catch (Exception a) {
+            }
+            finally{
+                if(reader != null){
+                    reader.close();
+                }
             }
         }
     }
+
+
+
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
@@ -407,4 +417,5 @@ public class Main {
         loadData();
         System.out.println("Data loaded – ready for queries");
     }
+
 }
