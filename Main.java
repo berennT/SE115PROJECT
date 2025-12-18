@@ -19,12 +19,12 @@ public class Main {
     public static void loadData() {
         data = new int[MONTHS][DAYS][COMMS];
         String[] parts;
-        int commindex = -1;
         for (int m = 0; m < 12; m++) {
             Scanner reader= null;
             try {
                 reader = new Scanner(Paths.get("Data_Files/" + months[m] + ".txt"));
                 while (reader.hasNextLine()) {
+                    int commindex = -1;
                     parts = reader.nextLine().split(",");
                     if (parts.length != 3) {
                         continue;
@@ -52,6 +52,7 @@ public class Main {
                             commindex = 4;
                             break;
                     }
+                    if (commindex == -1) continue;
                     data[m][Integer.parseInt(parts[0]) - 1][commindex] = Integer.parseInt(parts[2].trim());
                 }
             } catch (Exception a) {
